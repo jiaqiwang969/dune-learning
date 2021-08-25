@@ -10,6 +10,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: download and setup of dealii
+      run: |
+       pwd
                 
     - name: Build Doxygen documentation
       uses: mattnotmitt/doxygen-action@v1.1.0
