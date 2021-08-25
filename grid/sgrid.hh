@@ -17,38 +17,33 @@ namespace Dune
 
     /** @defgroup SGrid Structured Grid Module
 
-          本模块描述了Dune网格接口的试验实现。
-          它实现了简单结构化网格的网格接口。
+          This module describes the pilot implementation of the Dune grid interface.
+          It implements the grid interface for simple structured meshes.
 
-          下面的类图显示了这些类之间的关系
-          彼此之间的关系。
 
-          \image html sgridclasses.png "grid interface中类的类图"
-          \画面中的latex sgridclasses.eps "网格界面中的类图" width=/textwidth
+          Short description of the classes:
 
-          对类的简短描述。
+          - SElement is a class template providing the geometric part of a grid entity, i.e. a general polyhedron
+          with a mapping from a reference polyhedron to the actual polyhedron.
 
-          - SElement是一个类模板，提供了网格实体的几何部分，即一个一般的多面体
-          有一个从参考多面体到实际多面体的映射。
+          - SLevelIterator is a class template which allows to iterate over all grid entities of a given
+          codimension and level.
 
-          - SLevelIterator是一个类模板，它允许在所有给定维度和级别的网格实体上进行迭代。
-          的所有网格实体的迭代。
+          - SEntity is a class template realizing the grid entities. Grid entities are the constituents
+          of a grid. Grid entities of codimension 0 and codimension dim are defines through specialization.
+          Entities can be used as template parameters to generic algorithms. Each entity must therefore
+          provide the nested classes Element, LevelIterator, HierarchicIterator and NeighborIterator.
+          Element and LevelIterator are derived from the classes SELement and SLevelIterator.
+          Note that entities of codimension 0 and dim have an extended interface.
 
-          - SEntity是一个实现网格实体的类模板。网格实体是网格的组成成分
-          的组成部分。模数为0和模数为dim的网格实体是通过特殊化来定义的。
-          实体可以被用作通用算法的模板参数。因此，每个实体必须
-          提供嵌套类Element, LevelIterator, HierarchicIterator 和 NeighborIterator。
-          Element和LevelIterator是由SELement和SLevelIterator类派生出来的。
-          请注意，代码维度为0和dim的实体有一个扩展接口。
+          - SEntity::NeighborIterator provides access to all entities of codimension 0 sharing an object of codimension 1
+          with the given entity of codimension 0. This interface covers nonmatching grids.
 
-          - SEntity::NeighborIterator提供了对所有共享一个维度为1的对象的维度为0的实体的访问。
-          这个接口涵盖了非匹配的网格。
+          - SEntity::HierarchicIterator provides access to the sons of an entity of codimension 0.
 
-          - SEntity::HierarchicIterator提供了对一个维度为0的实体的子实体的访问。
-
-          - SGrid被概念化为一个不同维度的网格实体的容器。由于网格
-          被用作通用算法的模板参数，它们必须包括嵌套类
-          LevelIterator和Entity，它们派生自SLevelIterator和SEntity。
+          - SGrid is conceptualized as a container of grid entities of various codimensions. Since grids
+          are used as template parameters to generic algorithms they must include the nested classes
+          LevelIterator and Entity which are derived from SLevelIterator and SEntity.
 
           @{
    */
