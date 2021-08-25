@@ -11,22 +11,23 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: download and setup of dealii
+    - name: test
       run: |
        pwd
+       git clone https://github.com/jiaqiwang969/dune-learning.git
                 
     - name: Build Doxygen documentation
       uses: mattnotmitt/doxygen-action@v1.1.0
       with:
         doxyfile-path: "./Doxyfile"
-        working-directory: "./doc"
+        working-directory: "./dune-learning/doc"
         
     # Deploy the HTML documentation to GitHub Pages
     - name: Publish Doxygen documentation
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./doc/html/
+        publish_dir: ./dune-learning/doc/html/
         enable_jekyll: false
         allow_empty_commit: false
         force_orphan: true
