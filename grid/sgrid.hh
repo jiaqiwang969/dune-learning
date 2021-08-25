@@ -20,6 +20,11 @@ namespace Dune
           This module describes the pilot implementation of the Dune grid interface.
           It implements the grid interface for simple structured meshes.
 
+          The following class diagram shows how the classes are related with
+          each other:
+
+          \image html sgridclasses.png "Class diagram for classes in the grid interface"
+          \image latex sgridclasses.eps "Class diagram for classes in the grid interface" width=\textwidth
 
           Short description of the classes:
 
