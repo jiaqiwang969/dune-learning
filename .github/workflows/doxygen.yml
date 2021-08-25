@@ -9,6 +9,7 @@ jobs:
     runs-on: [self-hosted]
 
     steps:
+    - uses: actions/checkout@v2
                 
     - name: Build Doxygen documentation
       uses: mattnotmitt/doxygen-action@v1.1.0
