@@ -39,7 +39,7 @@ jobs:
 
       - name: install
         run: |
-         cd cd dune-course-material/iwr-course-2021
+         cd dune-course-material/iwr-course-2021
          ./install.sh
 
         
