@@ -35,6 +35,7 @@ jobs:
 
 
       - name: install
+        run: |
          cd iwr-course-2021
          ./install.sh
 
