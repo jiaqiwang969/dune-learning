@@ -1,29 +1,59 @@
-name: Doxygen
+name: Ubuntu
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
 
 jobs:
-  build-documentation:
+  build:
     runs-on: [self-hosted]
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: test
-      run: |
-       cd doc
-       doxygen Doxyfile
-                
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+
+      - name: install dune-module
+        run: |
+         git clone https://github.com/jiaqiwang969/dune-course-material.git
+         cd dune-course-material/iwr-course-2021
+         ./install.sh
+
         
-    # Deploy the HTML documentation to GitHub Pages
-    - name: Publish Doxygen documentation
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./doc/html/
-        enable_jekyll: false
-        allow_empty_commit: false
-        force_orphan: true
-        publish_branch: gh-pages
+
+      # - name: Publish Doxygen documentation
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: dealii/doc
+      #     enable_jekyll: false
+      #     allow_empty_commit: false
+      #     force_orphan: true
+      #     publish_branch: gh-pages
+
+      # - name: test
+      #   run: |
+      #     cd dealii
+      #     make setup_tests_hello
+      #     make setup_tests_mystl_test
+      #     ctest 
+
+      # - name: collect code coverage
+      # run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+
+
+
