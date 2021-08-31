@@ -30,7 +30,7 @@ jobs:
       - name: download
         run: |
          git clone https://github.com/jiaqiwang969/dune-course-material.git
-         cd dune-course-material iwr-course-2021.tar.gz 
+         cd dune-course-material
          tar -zxvf iwr-course-2021.tar.gz
 
 
