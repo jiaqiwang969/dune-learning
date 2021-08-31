@@ -30,7 +30,9 @@ jobs:
       - name: install dune-module
         run: |
          git clone https://github.com/jiaqiwang969/dune-course-material.git
-         cd dune-course-material/iwr-course-2021
+         cd dune-course-material iwr-course-2021.tar.gz 
+         tar -zxvf iwr-course-2021.tar.gz
+         cd iwr-course-2021
          ./install.sh
 
         
