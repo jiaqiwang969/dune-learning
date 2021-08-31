@@ -27,11 +27,14 @@ jobs:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
-      - name: install dune-module
+      - name: download
         run: |
          git clone https://github.com/jiaqiwang969/dune-course-material.git
          cd dune-course-material iwr-course-2021.tar.gz 
          tar -zxvf iwr-course-2021.tar.gz
+
+
+      - name: install
          cd iwr-course-2021
          ./install.sh
 
